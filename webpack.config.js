@@ -20,11 +20,15 @@ module.exports = {
     //  Aqui ponemos las extensiones con las que webpack trabajara
      extensions: ['.js']
    },
+   // Agregando el modulo para operar con babel
    module: {
      rules: [
         {
+          // Test declara que extension de archivos aplicara el loader
           test: /\.m?js$/,
+          // exclude permite omitir archivos o carpetas
           exclude: /node_modules/,
+          // Use es un objeto donde dices que loaders aplicaras
           use: {
             loader: 'babel-loader'
         }
