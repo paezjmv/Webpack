@@ -1,6 +1,9 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 // path es un paquete que ya viene instalado con node
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+
 
 module.exports = {
   // Nos permite definir el punto de entrada de nuestra app
@@ -23,24 +26,33 @@ module.exports = {
    },
    // Agregando el modulo para operar con babel
    module: {
-     rules: [
-        {
-          // Test declara que extension de archivos aplicara el loader
-          test: /\.m?js$/,
-          // exclude permite omitir archivos o carpetas
-          exclude: /node_modules/,
-          // Use es un objeto donde dices que loaders aplicaras
-          use: {
-            loader: 'babel-loader'
+    rules: [
+      {
+        // Test declara que extension de archivos aplicara el loader
+        test: /\.m?js$/,
+        // exclude permite omitir archivos o carpetas
+        exclude: /node_modules/,
+        // Use es un objeto donde dices que loaders aplicaras
+        use: {
+          loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.css|.styl$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'stylus-loader'
+        ],
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
-      template: './public/index.html',
-      filename: './index.html'
-    })
+      inject: true, //Inyecta el bundle al Template HTML
+      template: './public/index.html', //Definimos la ruta del template html
+      filename: './index.html' //Asignamos nombre al archivo
+    }),
+    new MiniCssExtractPlugin(),
   ]
 }
