@@ -2,7 +2,7 @@ const path = require('path');
 // path es un paquete que ya viene instalado con node
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -54,5 +54,13 @@ module.exports = {
       filename: './index.html' //Asignamos nombre al archivo
     }),
     new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "assets/images"),
+          to: "assets/images"
+        }
+      ]
+    }),
   ]
 }
