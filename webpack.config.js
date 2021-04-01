@@ -38,6 +38,7 @@ module.exports = {
         }
       },
       {
+        // Test que delcara la extencion de archivos para el loader de CSS y preprocesador
         test: /\.css|.styl$/i,
         use: [
           MiniCssExtractPlugin.loader,
