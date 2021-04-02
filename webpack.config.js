@@ -19,6 +19,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     // Este nombrar al archivo final
     filename: 'main.js',
+    assetModuleFilename: 'assets/images/[hash][ext][query]'
    },
    resolve: {
     //  Aqui ponemos las extensiones con las que webpack trabajara
@@ -27,7 +28,7 @@ module.exports = {
    // Agregando el modulo para operar con babel
    module: {
     rules: [
-      {
+      { //Loader de Babel
         // Test declara que extension de archivos aplicara el loader
         test: /\.m?js$/,
         // exclude permite omitir archivos o carpetas
@@ -37,7 +38,7 @@ module.exports = {
           loader: 'babel-loader'
         }
       },
-      {
+      { //Loader de Css y Preprocesadores
         // Test que delcara la extencion de archivos para el loader de CSS y preprocesador
         test: /\.css|.styl$/i,
         use: [
@@ -46,9 +47,23 @@ module.exports = {
           'stylus-loader'
         ],
       },
-      {
+      { // Loader de Imagenes
         test: /\.png/,
         type: 'asset/resource',
+      },
+      { //Loader de Fuentes
+        test: /\.(woff|woff2)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            mimetype: "aplication/font-woff",
+            name: "[name].[ext]",
+            outputPath: "./assets/fonts/",
+            publicPath: "./assets/fonts/",
+            esModule: false,
+          }
+        }
       }
     ]
   },
