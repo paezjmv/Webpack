@@ -25,7 +25,13 @@ module.exports = {
    },
    resolve: {
     //  Aqui ponemos las extensiones con las que webpack trabajara
-     extensions: ['.js']
+     extensions: ['.js'],
+     alias: {
+       '@utils': path.resolve(__dirname, 'src/utils/'),
+       '@templates': path.resolve(__dirname, 'src/templates/'),
+       '@styles': path.resolve(__dirname, 'src/styles/'),
+       '@images': path.resolve(__dirname, 'src/assets/images/'),
+     }
    },
    // Agregando el modulo para operar con babel
    module: {
@@ -62,7 +68,7 @@ module.exports = {
             mimetype: "aplication/font-woff",
             name: "[name].[contenthash].[ext]",
             outputPath: "./assets/fonts/",
-            publicPath: "./assets/fonts/",
+            publicPath: "../assets/fonts/",
             esModule: false,
           }
         }
