@@ -23,6 +23,7 @@ module.exports = {
     assetModuleFilename: 'assets/images/[hash][ext][query]'
    },
    mode: 'development',
+   watch: true,
    resolve: {
     //  Aqui ponemos las extensiones con las que webpack trabajara
      extensions: ['.js'],
